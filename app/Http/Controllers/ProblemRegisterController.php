@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProblemRegisterController extends Controller
 {
     public function register(Request $request)
     {
-        die('321');
         return $this->business->register($request);
     }
 }
