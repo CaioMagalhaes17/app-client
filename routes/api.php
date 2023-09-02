@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\Authenticate\LoginController;
-use App\Http\Controllers\ProblemRegisterController;
+use App\Http\Controllers\Problem\ProblemRegisterController;
+use App\Http\Controllers\Problem\ProblemGetController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -10,8 +11,14 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('login', [LoginController::class, 'userLogin']);
 });
 
-Route::group(['middleware' => 'auth:sanctum'] , function () {
-    Route::post('problem/register', [ProblemRegisterController::class, 'register']);
+Route::group(['prefix' => 'problem'], function () {
+    Route::group(['middleware' => 'auth:sanctum'], function () {
+        Route::post('register', [ProblemRegisterController::class, 'register']);
+        Route::post('edit', [ProblemRegisterController::class, 'edit']);
+        Route::delete('', [ProblemRegisterController::class, 'delete']);
+        Route::get('', [ProblemGetController::class, 'getAll']);
+        Route::get('{idProblem}', [ProblemGetController::class, 'getById']);
+    });
 });
 
 Route::middleware('auth:sanctum')->post('/logout', function (Request $request) {

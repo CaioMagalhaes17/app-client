@@ -25,7 +25,6 @@ class LoginController
 
     public function userLogin(UserLoginRequest $request)
     {
-        die('321');
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
             $token = $user->createToken('API Token')->plainTextToken;
