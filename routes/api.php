@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Authenticate\LoginController;
+use App\Http\Controllers\Budget\BudgetAcceptController;
 use App\Http\Controllers\Budget\BudgetGetController;
 use App\Http\Controllers\Problem\ProblemRegisterController;
 use App\Http\Controllers\Problem\ProblemGetController;
@@ -22,7 +23,11 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
 
     Route::group(['prefix' => 'budget'], function () {
-        Route::get('{idProblem}', [BudgetGetController::class, 'getByIdProblem']);
+        Route::post('accept', [BudgetAcceptController::class, 'acceptBudget']);
+        Route::get('idProblem/{idProblem}', [BudgetGetController::class, 'getByIdProblem']);
+        Route::get('', [BudgetGetController::class, 'getAllBudgets']);
+        Route::get('accepted/active', [BudgetGetController::class, 'getAcceptedBudgets']);
+        Route::get('accepted/inactive', [BudgetGetController::class, 'getInactiveAcceptedBudgets']);
     });
 });
 
