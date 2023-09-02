@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Authenticate\LoginController;
+use App\Http\Controllers\Budget\BudgetGetController;
 use App\Http\Controllers\Problem\ProblemRegisterController;
 use App\Http\Controllers\Problem\ProblemGetController;
 use Illuminate\Support\Facades\Route;
@@ -11,13 +12,17 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('login', [LoginController::class, 'userLogin']);
 });
 
-Route::group(['prefix' => 'problem'], function () {
-    Route::group(['middleware' => 'auth:sanctum'], function () {
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::group(['prefix' => 'problem'], function () {
         Route::post('register', [ProblemRegisterController::class, 'register']);
         Route::post('edit', [ProblemRegisterController::class, 'edit']);
         Route::delete('', [ProblemRegisterController::class, 'delete']);
         Route::get('', [ProblemGetController::class, 'getAll']);
         Route::get('{idProblem}', [ProblemGetController::class, 'getById']);
+    });
+
+    Route::group(['prefix' => 'budget'], function () {
+        Route::get('{idProblem}', [BudgetGetController::class, 'getByIdProblem']);
     });
 });
 

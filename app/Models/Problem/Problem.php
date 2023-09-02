@@ -10,4 +10,9 @@ class Problem extends Model
     protected $primaryKey = 'id_problem';
     protected $table = 'problem_registered';
     protected $timeStamps = false;
+
+    public function budget()
+    {
+        return $this->hasMany(Budget::class, 'fk_id_problem');
+    }
 }
