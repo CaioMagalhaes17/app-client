@@ -16,11 +16,11 @@ class ProblemRegister extends Problem
         $this->model->save();   
     }
 
-    public function edit($request){
-        return $this->model->where('id_problem', $request['id_problem'])->update($request);
+    public function edit(array $data){
+            
     }
 
-    public function delete($idProblem){
+    public function delete(string $idProblem){
         return $this->model->where('id_problem', $idProblem)->delete($idProblem);
     }
 }

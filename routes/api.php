@@ -24,7 +24,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::group(['prefix' => 'budget'], function () {
         Route::post('accept', [BudgetAcceptController::class, 'acceptBudget']);
-        Route::get('idProblem/{idProblem}', [BudgetGetController::class, 'getByIdProblem']);
+        Route::get('problemId/{idProblem}', [BudgetGetController::class, 'getByProblemId']);
         Route::get('', [BudgetGetController::class, 'getAllBudgets']);
         Route::get('accepted/active', [BudgetGetController::class, 'getAcceptedBudgets']);
         Route::get('accepted/inactive', [BudgetGetController::class, 'getInactiveAcceptedBudgets']);

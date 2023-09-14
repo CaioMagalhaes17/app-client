@@ -5,13 +5,14 @@ namespace App\Business\Budget;
 use App\Business\Business;
 use App\Business\Problem\Problem;
 use App\Business\Problem\ProblemGet;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class BudgetGet {
     
     use Business;
 
-    public function getAllBudgets(){
+    public function getAllBudgets(): Collection {
         $problems = (new ProblemGet())->getAll();
         if (!$problems->isEmpty()){
             foreach ($problems as $problem){
@@ -20,11 +21,11 @@ class BudgetGet {
                     $budgets[] = $problem->budget;
                 }
             }
-            return $budgets;
+            return collect($budgets);
         }
     }
 
-    public function getByIdProblem(string $idProblem){
+    public function getByProblemId(string $idProblem){
         (new Problem)->userHasPermission($idProblem);
         $problem = (new ProblemGet())->getById($idProblem);
         if (!$problem->isEmpty()){
@@ -45,7 +46,7 @@ class BudgetGet {
                     }
                 }
             }
-            return $budgets;
+            return collect($budgets);
         }
     }
 }

@@ -3,22 +3,25 @@
 namespace App\Http\Controllers\Budget;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Budget\BudgetAcceptedResource;
+use App\Http\Resources\Budget\BudgetByProblemIdResource;
+use App\Http\Resources\Budget\BudgetIndexResource;
 
 class BudgetGetController extends Controller{
 
-    public function getAllBudgets(){
-        return $this->business->getAllBudgets();
+    public function getAllBudgets() : BudgetIndexResource{
+        return new BudgetIndexResource($this->business->getAllBudgets());
     }
 
-    public function getByIdProblem(string $idProblem){
-        return $this->business->getByIdProblem($idProblem);
+    public function getByProblemId(string $idProblem) : BudgetByProblemIdResource{
+        return new BudgetByProblemIdResource($this->business->getByProblemId($idProblem));
     }
 
-    public function getAcceptedBudgets(){
-        return $this->business->getAcceptedBudgets();
+    public function getAcceptedBudgets() : BudgetAcceptedResource{
+        return new BudgetAcceptedResource($this->business->getAcceptedBudgets());
     }
 
-    public function getOldAcceptedBudgets(){
-        return $this->business->getOldAcceptedBudgets();
+    public function getOldAcceptedBudgets() : BudgetAcceptedResource{
+        return new BudgetAcceptedResource($this->business->getOldAcceptedBudgets());
     }
 }

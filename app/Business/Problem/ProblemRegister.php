@@ -18,9 +18,9 @@ class ProblemRegister extends Problem
     }
 
     public function edit(Request $request){
-        $request = $request->only('id_problem','brand_problem', 'usage_time_problem', 'model_problem', 'desc_problem');
-        $this->userHasPermission($request['id_problem']);
-        return $this->repository->edit($request);
+        $data = $request->only('id_problem','brand_problem', 'usage_time_problem', 'model_problem', 'desc_problem');
+        $this->userHasPermission($data['id_problem']);
+        return $this->repository->edit($data);
     }
 
     public function delete(Request $request){

@@ -11,4 +11,5 @@ class Problem {
     public function __construct(){
         $this->model = new ProblemModel;
     }
+
 }
