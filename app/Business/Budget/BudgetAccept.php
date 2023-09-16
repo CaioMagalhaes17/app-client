@@ -4,6 +4,7 @@ namespace App\Business\Budget;
 
 use App\Business\Business;
 use App\Business\Problem\ProblemGet;
+use app\Exceptions\UserNotAuthorizedException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

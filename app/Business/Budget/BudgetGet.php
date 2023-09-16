@@ -2,6 +2,9 @@
 
 namespace App\Business\Budget;
 
+use App\Business\Budget\Exception\BudgetNotFoundException;
+use App\Business\Budget\Exception\BudgetsAcceptedNotFoundException;
+use App\Business\Budget\Exception\NoneBudgetsFoundException;
 use App\Business\Business;
 use App\Business\Problem\Problem;
 use App\Business\Problem\ProblemGet;
@@ -21,7 +24,7 @@ class BudgetGet {
                     $budgets[] = $problem->budget;
                 }
             }
-            return collect($budgets);
+            return !empty($budgets) ? collect($budgets) : throw new NoneBudgetsFoundException;
         }
     }
 
@@ -31,6 +34,7 @@ class BudgetGet {
         if (!$problem->isEmpty()){
             return $problem[0]->budget;
         }
+        throw new BudgetNotFoundException;
     }
 
     public function getAcceptedBudgets(){
@@ -45,6 +49,7 @@ class BudgetGet {
                         }
                     }
                 }
+                throw new BudgetsAcceptedNotFoundException;
             }
             return collect($budgets);
         }
