@@ -16,8 +16,8 @@ Route::group(['prefix' => 'user'], function () {
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::group(['prefix' => 'problem'], function () {
         Route::post('register', [ProblemRegisterController::class, 'register']);
-        Route::post('edit', [ProblemRegisterController::class, 'edit']);
-        Route::delete('', [ProblemRegisterController::class, 'delete']);
+        Route::post('edit/{idProblem}', [ProblemRegisterController::class, 'edit']);
+        Route::delete('{idProblem}', [ProblemRegisterController::class, 'delete']);
         Route::get('', [ProblemGetController::class, 'getAll']);
         Route::get('{idProblem}', [ProblemGetController::class, 'getById']);
     });

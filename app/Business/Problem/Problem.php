@@ -2,7 +2,7 @@
 
 namespace App\Business\Problem;
 
-use app\Exceptions\UserNotAuthorizedException;
+use App\Exceptions\UserNotAuthorizedException;
 use Illuminate\Support\Facades\Auth;
 
 class Problem {

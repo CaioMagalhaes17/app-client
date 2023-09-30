@@ -11,21 +11,20 @@ class ProblemRegister extends Problem
 {
     use Business;
 
-    public function register(Request $request)
+    public function register(Request $request) : bool
     {   
         $request->only('brand_problem', 'usage_time_problem', 'model_problem', 'desc_problem');
         return $this->repository->register($request, Auth::user()->id);
     }
 
-    public function edit(Request $request){
-        $data = $request->only('id_problem','brand_problem', 'usage_time_problem', 'model_problem', 'desc_problem');
-        $this->userHasPermission($data['id_problem']);
-        return $this->repository->edit($data);
+    public function edit(Request $request, string $idProblem) : bool{
+        $data = $request->only('brand_problem', 'usage_time_problem', 'model_problem', 'desc_problem');
+        $this->userHasPermission($idProblem);
+        return $this->repository->edit($data, $idProblem);
     }
 
-    public function delete(Request $request){
-        $request->only('id_problem');
-        $this->userHasPermission($request->id_problem);
-        return $this->repository->delete($request->id_problem);
+    public function delete(string $idProblem) : bool{
+        $this->userHasPermission($idProblem);
+        return $this->repository->delete($idProblem);
     }
 }

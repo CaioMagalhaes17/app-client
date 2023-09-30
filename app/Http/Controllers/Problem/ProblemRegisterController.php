@@ -24,10 +24,10 @@ class ProblemRegisterController extends Controller
         }
     }
 
-    public function edit(Request $request) : JsonResponse {
+    public function edit(Request $request, string $idProblem) : JsonResponse {
         try {
             return Response::json(
-                ($this->business->edit($request)),
+                ($this->business->edit($request, $idProblem)),
                 ResponseHttpCode::HTTP_CREATED
             );
         } catch (\App\Business\Problem\Exception\ProblemNotEditedException $e) {
@@ -37,10 +37,10 @@ class ProblemRegisterController extends Controller
         }
     }
 
-    public function delete(Request $request) : JsonResponse {
+    public function delete(string $idProblem) : JsonResponse {
         try {
             return Response::json(
-                ($this->business->delete($request)),
+                ($this->business->delete($idProblem)),
                 ResponseHttpCode::HTTP_OK
             );
         } catch (\App\Business\Problem\Exception\ProblemNotExcludedException $e) {

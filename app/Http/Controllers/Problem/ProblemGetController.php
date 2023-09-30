@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\Response;
 
 class ProblemGetController extends Controller
 {
-    public function getAll(Request $request) : JsonResponse {
+    public function getAll() : JsonResponse {
         try {
             return Response::json(
-                new ProblemIndexResource($this->business->getAll($request)),
+                new ProblemIndexResource($this->business->getAll()),
                 ResponseHttpCode::HTTP_OK);
         } catch (\App\Business\Problem\Exception\ProblemsNotFoundException $e) {
             abort(ResponseHttpCode::HTTP_NO_CONTENT, $e->getMessage());
