@@ -14,7 +14,7 @@ Route::group(['prefix' => 'user'], function () {
 });
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::group(['prefix' => 'problem'], function () {
+    Route::group(['prefix' => 'problem', 'middleware' => 'log.problem.endpoint'], function () {
         Route::post('register', [ProblemRegisterController::class, 'register']);
         Route::post('edit/{idProblem}', [ProblemRegisterController::class, 'edit']);
         Route::delete('{idProblem}', [ProblemRegisterController::class, 'delete']);
@@ -22,7 +22,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::get('{idProblem}', [ProblemGetController::class, 'getById']);
     });
 
-    Route::group(['prefix' => 'budget'], function () {
+    Route::group(['prefix' => 'budget', 'middleware' => 'log.budget.endpoint'], function () {
         Route::post('accept', [BudgetAcceptController::class, 'acceptBudget']);
         Route::get('problemId/{idProblem}', [BudgetGetController::class, 'getByProblemId']);
         Route::get('', [BudgetGetController::class, 'getAllBudgets']);

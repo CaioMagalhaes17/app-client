@@ -6,8 +6,8 @@ use App\Business\Problem\Exception\ProblemNotFoundException;
 use App\Business\Problem\Exception\ProblemsNotFoundException;
 
 class ProblemGet extends Problem {
-    public function getAll($idUser){
-        $problems = $this->model->where('fk_id_client_problem', '3333')->get();
+    public function getAll(string $idUser){
+        $problems = $this->model->where('fk_id_client_problem', $idUser)->get();
         if (!$problems->isEmpty()){
             return $problems;
         }
