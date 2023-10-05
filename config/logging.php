@@ -134,11 +134,35 @@ return [
             'level' => 'debug',
         ],
 
+        'problemCreated' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/problem/created.log'),
+            'level' => 'debug'
+        ],
+
+        'problemEdited' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/problem/edited.log'),
+            'level' => 'debug'
+        ],
+
+        'problemDeleted' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/problem/deleted.log'),
+            'level' => 'debug'
+        ],
+
         'budgetEndpoint' => [
             'driver' => 'single',
             'path' => storage_path('logs/budget/endpoint.log'),
             'level' => 'debug'
-        ]
+        ],
+
+        'budgetAccepted' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/budget/accepted.log'),
+            'level' => 'debug'
+        ],
     ],
 
 ];

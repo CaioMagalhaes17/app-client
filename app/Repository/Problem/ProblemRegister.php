@@ -2,18 +2,20 @@
 
 namespace App\Repository\Problem;
 
+use App\Models\Problem\Problem as ProblemModel;
 use Illuminate\Http\Request;
 
 class ProblemRegister extends Problem
 {
-    public function register(Request $request, string $userId)
+    public function register(Request $request, string $userId) : ProblemModel
     {
         $this->model->brand_problem = $request->brand_problem;
         $this->model->usage_time_problem = $request->usage_time_problem;
         $this->model->model_problem = $request->model_problem;
         $this->model->desc_problem = $request->desc_problem;
         $this->model->fk_id_client_problem = $userId;
-        $this->model->save();   
+        $this->model->save();
+        return $this->model;
     }
 
     public function edit(array $data, string $idProblem) : bool {

@@ -7,6 +7,8 @@ use App\Business\Problem\ProblemGet;
 use app\Exceptions\UserNotAuthorizedException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use App\Models\Problem\Problem as ProblemModel;
 
 class BudgetAccept {
     
@@ -15,7 +17,10 @@ class BudgetAccept {
     public function acceptBudget(Request $request){
         $request->only('idBudget');
         $this->userHasPermission($request->idBudget);
-        return $this->repository->acceptBudget($request->idBudget);
+        $budget = $this->repository->acceptBudget($request->idBudget);
+        if ($budget){
+            Log::channel('budgetAccepted')->info('[CLIENT API] Budget accepted: ' . $budget . ' - User ID: ' . Auth::user()->id);
+        }
     }
 
     private function userHasPermission($idBudget){
