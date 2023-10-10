@@ -7,13 +7,13 @@ use Illuminate\Http\Request;
 
 class ProblemRegister extends Problem
 {
-    public function register(Request $request, string $userId) : ProblemModel
+    public function register(array $data) : ProblemModel
     {
-        $this->model->brand_problem = $request->brand_problem;
-        $this->model->usage_time_problem = $request->usage_time_problem;
-        $this->model->model_problem = $request->model_problem;
-        $this->model->desc_problem = $request->desc_problem;
-        $this->model->fk_id_client_problem = $userId;
+        $this->model->brand_problem = $data['brand_problem'];
+        $this->model->usage_time_problem = $data['usage_time_problem'];
+        $this->model->model_problem = $data['model_problem'];
+        $this->model->desc_problem = $data['desc_problem'];
+        $this->model->fk_id_client_problem = $data['user_id'];
         $this->model->save();
         return $this->model;
     }

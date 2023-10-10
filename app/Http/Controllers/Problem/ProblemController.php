@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response as ResponseHttpCode;
 use Illuminate\Support\Facades\Response;
 
-class ProblemRegisterController extends Controller
+class ProblemController extends Controller
 {
     public function register(Request $request) : JsonResponse {
         try {
