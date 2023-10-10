@@ -10,6 +10,7 @@ use App\Business\Problem\Problem;
 use App\Business\Problem\ProblemGet;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Problem\Budget as BudgetModel;
 
 class BudgetGet {
     
@@ -19,7 +20,6 @@ class BudgetGet {
         $problems = (new ProblemGet())->getAll();
         if (!$problems->isEmpty()){
             foreach ($problems as $problem){
-                (new Problem)->userHasPermission($problem->id_problem);
                 if (!$problem->budget->isEmpty()){
                     $budgets[] = $problem->budget;
                 }
@@ -38,20 +38,18 @@ class BudgetGet {
     }
 
     public function getAcceptedBudgets(){
-        $problems = (new ProblemGet())->getAll();
-        if (!$problems->isEmpty()){
-            foreach ($problems as $problem){
-                if (!$problem->budget->isEmpty()){
-                    (new Problem)->userHasPermission($problem->id_problem);
-                    foreach ($problem->budget as $budget){
-                        if ($budget->accepted_budget == 'V'){
-                            $budgets[] = $budget;
-                        }
-                    }
+        $allBudgets = $this->getAllBudgets();
+        foreach ($allBudgets as $budget){
+            foreach ($budget as $value){
+                if ($value->accepted_budget == 'V'){
+                    $return[] = $value;
                 }
-                throw new BudgetsAcceptedNotFoundException;
             }
-            return collect($budgets);
         }
+        return $return;
+    }
+
+    public function getBudgetById(string $idBudget){
+        return (new BudgetModel)::find($idBudget) ?? throw new BudgetNotFoundException;
     }
 }

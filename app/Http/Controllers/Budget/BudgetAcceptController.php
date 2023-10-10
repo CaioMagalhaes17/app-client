@@ -20,6 +20,8 @@ class BudgetAcceptController extends Controller{
             abort(ResponseHttpCode::HTTP_UNAUTHORIZED, $e->getMessage());
         } catch (\App\Business\Budget\Exception\BudegtAlreadyAcceptedException $e) {
             abort(ResponseHttpCode::HTTP_CONFLICT , $e->getMessage());
+        } catch (\App\Business\Budget\Exception\BudgetNotFoundException $e) {
+            abort(ResponseHttpCode::HTTP_NOT_FOUND , $e->getMessage());
         }   
     }
 }
