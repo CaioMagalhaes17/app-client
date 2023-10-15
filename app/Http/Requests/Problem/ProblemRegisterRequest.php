@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Authenticate;
+namespace App\Http\Requests\Problem;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,21 +24,17 @@ class ProblemRegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'brand_problem' => 'required',
-            'desc_problem' => 'required',
-            'model_problem' => 'required|email|unique:users',
-            'usage_time_problem' => 'required|min:8|confirmed',
+            'brand' => 'required',
+            'description' => 'required',
+            'model' => 'required',
+            'usage_time' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Preencha este campo para o registro',
-            'email.email' => 'Por favor, digite um email válido',
-            'email.unique' => 'Este email já está sendo utilizado',
-            'password.min' => 'A senha deve possuir no mínimo 8 caracteres',
-            'password.confirmed' => 'As senhas não se coincidem'
+            'required' => 'Preencha este campo para o registro',
         ];
     }
 }
